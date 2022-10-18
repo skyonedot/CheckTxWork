@@ -2,7 +2,9 @@
 
 ---
 testTx.js: 指定Address, data的情况下 快速发送tx
-getContractSpecificFunctionHistory.js
+getContractSpecificFunction.js 指定Address和FunctionName, 拿到Tx
+getContractSpecificEvent.js    指定Address和EventName, 拿到Tx
+
 
 
 
