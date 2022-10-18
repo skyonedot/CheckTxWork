@@ -1,7 +1,14 @@
 
 
 ---
-指定Address, data的情况下 快速发送tx
+testTx.js: 指定Address, data的情况下 快速发送tx
+getContractSpecificFunctionHistory.js
+
+
+
+limitby example
+
+> options: {limit: 25000, offset: ${offset},limitBy: {each: "receiver.address",limit:100}}
 
 
 
