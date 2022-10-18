@@ -1,23 +1,23 @@
 const ethers = require('ethers')
-const { client,querySpecificFunctionHistory } = require('./graphql.js')
+const { client,querySpecificEventHistory } = require('./graphql.js')
 require('dotenv').config()
 
 
-async function getFunction(network='ethereum', address, functionName, amountTx){
+async function getEvent(network='ethereum', address, eventName, amountTx){
     let limit = 10
     for(let offset = 0; offset < amountTx; offset += limit){
-        let res = await client(process.env.GraphAPIBeiHai).request(querySpecificFunctionHistory(network=network,address=address, functionName=functionName, limit=limit, offset=offset));
-        if(res['ethereum']['smartContractCalls'].length == 0){
+        let res = await client(process.env.GraphAPIBeiHai).request(querySpecificEventHistory(network=network,address=address, eventName=eventName, limit=limit, offset=offset));
+        if(res['ethereum']['smartContractEvents'].length == 0){
             console.log(`Offset = ${offset}, it had get all the tx`)
-            break
+            break·
         }
-        for(let re of res['ethereum']['smartContractCalls']){
+        for(let re of res['ethereum']['smartContractEvents']){
             console.log(re)
         }
     }
 }
 
-getFunction("bsc","0x5af6d33de2ccec94efb1bdf8f92bd58085432d2c","closeLottery",10)
+getEvent("ethereum","0x06450dee7fd2fb8e39061434babcfc05599a6fb8","RankClaimed",10)
 
 
 

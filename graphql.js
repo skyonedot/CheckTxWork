@@ -47,7 +47,45 @@ const querySpecificFunctionHistory = (network, contract, functionName, limit, of
         `
 }
 
+const querySpecificEventHistory = (network, contract, eventName, limit, offset) => {
+    return gql`
+        query MyQuery {
+            ethereum(network: ${network}) {
+            smartContractEvents(
+                options: {desc: "block.height", limit: ${limit}, offset: ${offset}}
+                smartContractAddress: {in: ["${contract}"]}
+                smartContractEvent: {in: ["${eventName}"]}
+            ) {
+                transaction {
+                    hash
+                }
+                block {
+                    height
+                    timestamp {
+                        iso8601
+                    }
+                }
+                arguments {
+                    argument
+                    value
+                }
+                smartContractEvent {
+                    name
+                    signature
+                    signatureHash
+                }
+            }
+            }
+        }
+      
+        `
+}
+
+
+
+
 module.exports = {
     client,
-    querySpecificFunctionHistory
+    querySpecificFunctionHistory,
+    querySpecificEventHistory
 }
